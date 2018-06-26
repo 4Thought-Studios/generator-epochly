@@ -40,7 +40,10 @@
     "yosay": "^2.0.1"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "<rootDir>/generators/app/templates/"
+    ]
   },
   "scripts": {
     "prepublishOnly": "./node_modules/.bin/nsp check",

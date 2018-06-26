@@ -1,4 +1,4 @@
-# generator-epochly [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# generator-epochly [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage Status](https://coveralls.io/repos/github/4Thought-Studios/generator-epochly/badge.svg?branch=master)](https://coveralls.io/github/4Thought-Studios/generator-epochly?branch=master)
 
 > Generator for use with internal development of the epochly app
 

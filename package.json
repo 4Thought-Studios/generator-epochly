@@ -43,10 +43,10 @@
     "testEnvironment": "node"
   },
   "scripts": {
-    "prepublishOnly": "nsp check",
-    "pretest": "eslint .",
-    "precommit": "lint-staged",
-    "test": "jest"
+    "prepublishOnly": "./node_modules/.bin/nsp check",
+    "pretest": "./node_modules/.bin/eslint .",
+    "precommit": "./node_modules/.bin/lint-staged",
+    "test": "./node_modules/.bin/jest"
   },
   "lint-staged": {
     "*.js": [

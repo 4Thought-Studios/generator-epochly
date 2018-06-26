@@ -7,10 +7,11 @@ describe('generator-epochly:app', () => {
   beforeAll(() => {
     return helpers
       .run(path.join(__dirname, '../generators/app'))
-      .withPrompts({ someAnswer: true });
+      .withPrompts({ moduleName: 'name-x' });
   });
 
   it('creates files', () => {
     assert.file(['dummyfile.txt']);
+    assert.fileContent('dummyfile.txt', 'name-x');
   });
 });

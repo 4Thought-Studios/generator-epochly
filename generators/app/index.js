@@ -12,23 +12,24 @@ module.exports = class extends Generator {
 
     const prompts = [
       {
-        type: 'confirm',
-        name: 'someAnswer',
-        message: 'Would you like to enable this option?',
-        default: true
+        type: 'input',
+        name: 'moduleName',
+        message: 'What is the module name?',
+        required: true
       }
     ];
 
     return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
+      // To access props later use this.props.moduleName;
       this.props = props;
     });
   }
 
   writing() {
-    this.fs.copy(
+    this.fs.copyTpl(
       this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+      this.destinationPath('dummyfile.txt'),
+      { moduleName: this.props.moduleName }
     );
   }
 

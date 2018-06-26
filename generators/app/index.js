@@ -29,11 +29,22 @@ module.exports = class extends Generator {
     const formattedName = this._toPascalCase(this.props.moduleName);
     this.log(formattedName);
     // Files that need to be made but don't need a template
-    // this.fs.copy(this.templatePath(['Assets/.gitkeep', 'Components/.gitkeep']),);
+    ['Assets', 'Components'].forEach(emptyFolder =>
+      this.fs.copy(
+        this.templatePath(`${emptyFolder}/.gitkeep`),
+        this.destinationPath(`${formattedName}/${emptyFolder}/.gitkeep`)
+      )
+    );
     // Base module file
     this.fs.copyTpl(
       this.templatePath('index.js'),
       this.destinationPath(`${formattedName}/index.js`),
+      { componentName: formattedName }
+    );
+    // Module test
+    this.fs.copyTpl(
+      this.templatePath('index.test.js'),
+      this.destinationPath(`${formattedName}/index.test.js`),
       { componentName: formattedName }
     );
   }

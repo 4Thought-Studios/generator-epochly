@@ -2,7 +2,7 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
-
+const { toPascalCase, wordCount } = require('./helpers');
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
@@ -26,7 +26,13 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    const formattedName = this._toPascalCase(this.props.moduleName);
+    let formattedName;
+    if (wordCount(this.props.moduleName) > 1) {
+      formattedName = toPascalCase(this.props.moduleName);
+    } else {
+      formattedName = this.props.moduleName;
+    }
+
     this.log(formattedName);
     // Files that need to be made but don't need a template
     ['Assets', 'Components'].forEach(emptyFolder =>
@@ -47,18 +53,17 @@ module.exports = class extends Generator {
       this.destinationPath(`${formattedName}/index.test.js`),
       { componentName: formattedName }
     );
+    // Helpers file
+    this.fs.copy(
+      this.templatePath('helpers.js'),
+      this.destinationPath(`${formattedName}/helpers.js`)
+    );
+    // Helpers test file
+    this.fs.copy(
+      this.templatePath('helpers.test.js'),
+      this.destinationPath(`${formattedName}/helpers.test.js`)
+    );
   }
 
-  install() {
-    this.installDependencies();
-  }
-
-  _toPascalCase(str) {
-    return str
-      .match(/[a-z]+/gi)
-      .map(function(word) {
-        return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();
-      })
-      .join('');
-  }
+  install() {}
 };

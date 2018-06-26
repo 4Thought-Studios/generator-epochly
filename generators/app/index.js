@@ -26,14 +26,28 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    const formattedName = this._toPascalCase(this.props.moduleName);
+    this.log(formattedName);
+    // Files that need to be made but don't need a template
+    // this.fs.copy(this.templatePath(['Assets/.gitkeep', 'Components/.gitkeep']),);
+    // Base module file
     this.fs.copyTpl(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt'),
-      { moduleName: this.props.moduleName }
+      this.templatePath('index.js'),
+      this.destinationPath(`${formattedName}/index.js`),
+      { componentName: formattedName }
     );
   }
 
   install() {
     this.installDependencies();
+  }
+
+  _toPascalCase(str) {
+    return str
+      .match(/[a-z]+/gi)
+      .map(function(word) {
+        return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();
+      })
+      .join('');
   }
 };

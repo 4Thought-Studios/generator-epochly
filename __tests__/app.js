@@ -7,11 +7,15 @@ describe('generator-epochly:app', () => {
   beforeAll(() => {
     return helpers
       .run(path.join(__dirname, '../generators/app'))
-      .withPrompts({ moduleName: 'name-x' });
+      .withPrompts({ moduleName: 'brand new module' });
   });
 
   it('creates files', () => {
-    assert.file(['dummyfile.txt']);
-    assert.fileContent('dummyfile.txt', 'name-x');
+    assert.file(['BrandNewModule/index.js']);
+    assert.fileContent(
+      'BrandNewModule/index.js',
+      'class BrandNewModule extends Component'
+    );
+    assert.fileContent('BrandNewModule/index.js', 'export default BrandNewModule;');
   });
 });

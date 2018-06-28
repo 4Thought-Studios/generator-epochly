@@ -2,6 +2,6 @@
 
 import helpers from './helpers';
 
-// Test('it can run', () => {
-//   expect(helpers.example()).toMatchSnapshot();
-// });
+test.skip('it can run', () => {
+  expect(helpers.example()).toMatchSnapshot();
+});

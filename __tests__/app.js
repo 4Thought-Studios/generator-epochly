@@ -35,3 +35,17 @@ describe('generator-epochly:app', () => {
     assert.file(['BrandNewModule/Assets/.gitkeep', 'BrandNewModule/Components/.gitkeep']);
   });
 });
+
+describe('generator-epochly:app different inputs', () => {
+  beforeAll(() => {
+    return helpers
+      .run(path.join(__dirname, '../generators/app'))
+      .withPrompts({ moduleName: 'tasks' });
+  });
+
+  it('Can handle one-word module names', () => {
+    assert.file(['Tasks/index.js']);
+    assert.fileContent('Tasks/index.js', 'class Tasks extends Component');
+    assert.fileContent('Tasks/index.js', 'export default Tasks;');
+  });
+});

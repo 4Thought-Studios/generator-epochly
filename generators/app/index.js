@@ -2,7 +2,7 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
-const { toPascalCase, wordCount } = require('./helpers');
+const { toPascalCase } = require('./helpers');
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
@@ -26,14 +26,8 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    let formattedName;
-    if (wordCount(this.props.moduleName) > 1) {
-      formattedName = toPascalCase(this.props.moduleName);
-    } else {
-      formattedName = this.props.moduleName;
-    }
+    const formattedName = toPascalCase(this.props.moduleName);
 
-    this.log(formattedName);
     // Files that need to be made but don't need a template
     ['Assets', 'Components'].forEach(emptyFolder =>
       this.fs.copy(

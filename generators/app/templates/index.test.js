@@ -9,7 +9,7 @@ import { shallow } from 'enzyme';
 import { Text } from 'react-native';
 import <%= componentName %> from './index';
 
-test('it renders properly', () => {
+test.skip('it renders properly', () => {
   // Create a shallow wrapper of the component
   const wrapper = shallow(<<%= componentName %>/>);
   // Make sure it matches the snapshot
